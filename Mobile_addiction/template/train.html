@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% block main %}
+<style>
+    .inFormBackground-main{
+        width:1060px;
+        height: 650px;
+        overflow: scroll;
+    }
+    table {
+        margin: 15% auto;
+        border-collapse: collapse;
+        background-color: rgb(3, 3, 3);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color:#12e4af;
+        color: rgb(68, 65, 65);
+    }
+    tr:hover {
+        background-color: #ddd;
+    }
+    caption {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+</style>
+<div class="inFormBackground-main">
+{% if algorithm %}
+    <div class="inFormBackground">
+        <table>
+            <caption style="color: #08e0e7;">CALCULATION METRICS</caption>
+            <thead>
+                <tr>
+                    <th>{{algorithm}}</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>accuracy</td>
+                    <td>{{accuracy}}</td>
+                </tr>
+                <tr>
+                    <td>precision</td>
+                    <td>{{precision}}</td>
+                </tr>
+                <tr>
+                    <td>recall</td>
+                    <td>{{recall}}</td>
+                </tr>
+                <tr>
+                    <td>fscore</td>
+                    <td>{{fscore}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+{% if upload %}
+<style>
+    /* Center the form container */
+    .form-container {
+        width: 100%;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-top: 20%;
+        margin-left: 30px;
+    }
+
+    /* Style the input group */
+    .inputGroup {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .inputGroup label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+        color: #333;
+    }
+
+    /* Style the file input */
+    .inputGroup input[type="file"] {
+        width: 90%;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        cursor: pointer;
+        background: #f9f9f9;
+        transition: border-color 0.3s ease-in-out;
+    }
+
+    .inputGroup input[type="file"]:hover {
+        border-color: #007bff;
+    }
+
+    /* Style the submit button */
+    .submitForm {
+        background:  rgba(0, 0, 0, 0.8);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .submitForm:hover {
+        background: #0056b3;
+    }
+
+    /* Style messages */
+    p {
+        color: green;
+        font-weight: bold;
+    }
+</style>
+<div class="form-container">
+    <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <div class="inputGroup">
+            <label for="name">Dataset</label>
+            <input type="file" id="name" name="file" required>
+        </div>
+        <button class="submitForm">Upload & Split</button>
+    </form>
+</div>
+{% endif %}
+{% if temp %}
+{{temp | safe}}
+{% endif %}
+</div>
+{% endblock %}

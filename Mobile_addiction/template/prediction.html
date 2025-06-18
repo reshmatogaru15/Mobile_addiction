@@ -1,0 +1,107 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block main %}
+<style>
+    /* General Styles */
+    .inFormBackground {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        padding: 20px;
+    }
+    .inLoginForm {
+        background-color: #09dfee83;
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        width: 600px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .inputGroup {
+        margin-bottom: 20px;
+    }
+    .form-columns{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 15px;
+    }
+    .inputGroup label {
+        display: block;
+        margin-bottom: 8px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .inputGroup select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 6px;
+        background: rgba(2, 2, 2, 0.1);
+        color: #fff;
+        font-size: 14px;
+        transition: border-color 0.3s ease, background 0.3s ease;
+        cursor: pointer;
+    }
+
+    .inputGroup select:focus {
+        border-color: #181817;
+        background: rgba(14, 13, 13, 0.2);
+        outline: none;
+        cursor: pointer;
+    }
+
+    .submitForm {
+        width: 100%;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .submitForm:hover {
+        background: rgba(0, 0, 0, 0.959);
+        transform: translateY(-2px);
+    }
+
+    .submitForm:active {
+        transform: translateY(0);
+    }
+
+    @media (max-width: 600px) {
+        .form-columns{
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="inFormBackground">
+    <div class="inLoginForm">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-columns">
+                {% for field, label in feature_labels.items %}
+                <div class="inputGroup">
+                    <label for="{{ field }}">{{ label }}</label>
+                    <select id="{{ field }}" name="{{ field }}">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="submitForm">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

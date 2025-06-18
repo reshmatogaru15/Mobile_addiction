@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block main %}
+<style>
+    /* General Styles */
+    .inFormBackground {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        margin: 0;
+    }
+    .inLoginForm {
+        background-color: #2af3e241;
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.836);
+        max-width: 500px;
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+    }
+    h2 {
+        color: brown;
+        font-weight: bold;
+    }
+    .recommendation {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #000;
+    }
+    .buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .submit {
+        text-align: center;
+        text-decoration: none;
+        padding: 10px 15px;
+        color: aliceblue;
+        border-radius: 5px;
+        background-color: rgba(13, 14, 14, 0.555);
+        margin: 5px;
+    }
+    .submit:hover {
+        background-color: rgba(13, 14, 14, 0.8);
+    }
+</style>
+
+<div class="inFormBackground">
+    <div class="inLoginForm">
+        <h2>Predicted Addiction Level: <span>{{ outcome }}</span></h2>
+
+        <div class="recommendation">
+            {% if outcome == "HIGH" %}
+                <p><b>⚠️ High Mobile Addiction Detected!</b></p>
+                <p>Consider reducing screen time gradually. Try scheduling non-digital activities, practicing digital detox days, and using app blockers.</p>
+            {% elif outcome == "MODERATE" %}
+                <p><b>⚖️ Moderate Mobile Usage</b></p>
+                <p>You're in control, but be mindful of excessive usage. Set screen time limits and ensure a healthy balance between digital and real-world activities.</p>
+            {% elif outcome == "LOW" %}
+                <p><b>✅ Healthy Mobile Usage</b></p>
+                <p>Great job! You have a healthy relationship with mobile usage. Maintain this balance and encourage others to do the same.</p>
+            {% else %}
+                <p>⚠️ Unexpected result. Please try again.</p>
+            {% endif %}
+        </div>
+
+        <div class="buttons">
+            <a class="submit" href="/">Home</a>
+            <a class="submit" href="prediction">Try Again</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

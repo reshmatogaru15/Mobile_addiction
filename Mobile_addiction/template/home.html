@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+<style>
+    .environment-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+      .environment-table th,
+      .environment-table td {
+        padding: 12px 15px;
+        text-align: center;
+      }
+      
+      .environment-table th {
+        background-color: rgba(23, 42, 58, 0.9); /* Dark blue-gray for headers */
+        color: #09dfee; /* Red for urgency */
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      
+      .environment-table tbody tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .environment-table tbody tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+      
+      .environment-table tbody tr:hover {
+        background-color: rgba(255, 95, 95, 0.1); /* Red hover effect */
+      }
+      
+      .environment-table tbody td {
+        color: #ccc; /* Light gray for readability */
+      }
+      
+      .environment-table tbody td:first-child {
+        font-weight: bold;
+        color: #09dfee; /* Red for location names */
+      }
+        .notification-box {
+            width: 300px;
+            background-color: rgba(255, 95, 95, 0.2); /* Semi-transparent red background */
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.836);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            margin: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+        .notification-box h3 {
+            color: #09dfee; /* Red for headings */
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+    
+        .notification-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    
+        .no-messages {
+            color: rgba(255, 255, 255, 0.7); /* Light gray for no messages */
+            text-align: center;
+            font-size: 14px;
+            margin: 0;
+        }
+    
+        .notification-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .message {
+          text-align: center;
+          color: #09dfee;
+          font-size: 14px;
+          margin-bottom: 15px;
+          display: flex;
+          position: absolute;
+      }  
+        .notification-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    
+        .notification-icon {
+            font-size: 18px;
+            margin-right: 10px;
+            color: #09dfee; /* Red for icons */
+        }
+    
+        .notification-text {
+            color: #fff; /* White for text */
+            font-size: 14px;
+        }
+    
+        /* Scrollbar Styling */
+        .notification-list::-webkit-scrollbar {
+            width: 8px;
+        }
+    
+        .notification-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+    
+        .notification-list::-webkit-scrollbar-thumb {
+            background: rgba(95, 255, 255, 0.8);
+            border-radius: 4px;
+        }
+    
+        .notification-list::-webkit-scrollbar-thumb:hover {
+            background: rgb(29, 241, 248);
+        }
+    </style>
+</style>
+<div>
+  {% if messages %}
+  {% for message in messages %}
+      <p class="message">{{ message }}</p>
+  {% endfor %}
+  {% endif %}
+</div>
+<div class="content">
+  <h1 ><marquee>Mobile Addicition</marquee></h1>
+</div>
+<div style="display: flex;justify-content:center">
+  <img style="width: 800px;" src="https://cdn.slidesharecdn.com/ss_thumbnails/mobileaddiction-230701064402-df2cc53a-thumbnail.jpg?width=560&fit=bounds">
+</div>
+{% endblock %}
